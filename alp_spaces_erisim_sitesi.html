@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alp Space erişim sitesi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0b071e; /* Çok koyu uzay moru */
+            color: #f1f0f5; /* Açık gri/beyaz */
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            margin-top: 20px;
+        }
+
+        .logo-box {
+            padding: 8px 20px;
+            border: 2px solid #6c5ce7;
+            border-radius: 8px;
+            background-color: #1a1235;
+            display: inline-block;
+            font-family: monospace;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #a29bfe;
+            margin-bottom: 15px;
+            box-shadow: 0 0 15px rgba(108, 92, 231, 0.4);
+        }
+
+        header h1 {
+            font-size: 2.3rem;
+            color: #e0d1ff;
+            text-shadow: 0 0 10px rgba(162, 155, 254, 0.5);
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: #958ba7;
+            font-size: 1rem;
+        }
+
+        /* Yan Yana Düzen */
+        .main-container {
+            width: 100%;
+            max-width: 1300px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            justify-content: center;
+        }
+
+        .my-card {
+            background-color: #150e2d; /* Koyu mor kart arka planı */
+            border: 1px solid #2d1f54;
+            border-radius: 12px;
+            padding: 20px;
+            width: 380px;
+            min-height: 450px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+        }
+
+        /* Mor Tonlarında Başlıklar */
+        .title-yt { color: #ff7675; font-size: 1.5rem; margin-bottom: 12px; font-weight: bold;}
+        .title-sc { color: #a29bfe; font-size: 1.5rem; margin-bottom: 12px; font-weight: bold;}
+        .title-ch { color: #fd79a8; font-size: 1.5rem; margin-bottom: 12px; font-weight: bold;}
+
+        .card-desc {
+            color: #c2b9d4;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .neon-btn {
+            background-color: #6c5ce7; /* Mor buton */
+            color: #ffffff;
+            padding: 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            display: block;
+        }
+
+        .neon-btn:hover {
+            background-color: #a29bfe; /* Leylak rengi parlama */
+            box-shadow: 0 0 15px rgba(162, 155, 254, 0.6);
+            color: #150e2d;
+        }
+
+        /* Scratch Blok Tasarımları */
+        .scratch-area {
+            background-color: #0b0617;
+            border: 1px solid #231643;
+            border-radius: 8px;
+            padding: 12px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .block-blue { background-color: #8c7ae6; color: #fff; padding: 5px 10px; border-radius: 4px; width: max-content; }
+       
+        .tab-1 { margin-left: 15px; }
+        .tab-2 { margin-left: 30px; }
+
+        /* Chat Arayüzü */
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background-color: #1c133a;
+            border: 1px solid #3d2a75;
+            border-radius: 8px;
+            padding: 12px;
+        }
+
+        .chat-input-field {
+            background-color: #0b0617;
+            border: 1px solid #3d2a75;
+            color: #e0d1ff;
+            padding: 8px;
+            border-radius: 5px;
+            outline: none;
+            width: 100%;
+            font-size: 0.85rem;
+        }
+
+        .chat-input-field::placeholder {
+            color: #635683;
+        }
+
+        .msg-box {
+            max-height: 180px;
+            overflow-y: auto;
+            border-bottom: 1px dashed #3d2a75;
+            padding-bottom: 5px;
+            margin-bottom: 5px;
+            font-size: 0.85rem;
+            color: #a29bfe;
+        }
+
+        .single-msg {
+            background: #0b0617;
+            padding: 8px;
+            border-radius: 4px;
+            margin-bottom: 5px;
+            border-left: 3px solid #6c5ce7;
+            color: #c2b9d4;
+            word-wrap: break-word;
+        }
+
+        .msg-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+
+        .avatar-img {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: #1c133a;
+            border: 1px solid #6c5ce7;
+        }
+        
+        .single-msg pre {
+            white-space: pre-wrap;
+            font-family: monospace;
+            margin-top: 5px;
+            color: #e0d1ff;
+            background-color: #150e2d;
+            padding: 6px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-box">[ Alp Space ]</div>
+        <h1>Alp Space erişim sitesi</h1>
+        <p>YouTube Kanalı ve Scratch Blokları Kod Paylaşım Platformu</p>
+    </header>
+
+    <div class="main-container">
+
+        <!-- 1. KART: YOUTUBE -->
+        <div class="my-card">
+            <div>
+                <div class="title-yt">YouTube Kategorisi</div>
+                <p class="card-desc">Alp Space'in en güncel ve eğlenceli videolarına ulaşmak, yeni içerikleri kaçırmamak için resmi YouTube kanalımızı ziyaret edin!</p>
+            </div>
+            <a href="https://youtube.com" target="_blank" class="neon-btn">Alp Space Kanalına Git ➔</a>
+        </div>
+
+        <!-- 2. KART: SCRATCH BLOKLARI -->
+        <div class="my-card">
+            <div>
+                <div class="title-sc">Scratch Kategorisi</div>
+                <p class="card-desc">Projelerinizde kullanabileceğiniz örnek kod yapısı aşağıdadır:</p>
+                
+                <div class="scratch-area" id="scratchCodeArea">
+define elsee
+  repeat 2
+    turn ↻ 1 degrees
+    move 1 steps
+when green flag clicked
+  forever
+    elsee</div>
+            </div>
+            <button class="neon-btn" style="margin-top: 15px;" onclick="copyScratchText()">Kodu Kopyala</button>
+        </div>
+
+        <!-- 3. KART: KOD PAYLAŞIMI ALANI -->
+        <div class="my-card">
+            <div>
+                <div class="title-ch">Kod Paylaşım Paneli</div>
+                <p class="card-desc">Takipçiler arası şifreli ve güvenli canlı kod panosu:</p>
+                
+                <div class="chat-container">
+                    <div class="msg-box" id="boxM">
+                        <!-- Mesajlar Firebase'den dinamik olarak buraya yüklenecek -->
+                    </div>
+                    
+                    <input type="text" id="uName" class="chat-input-field" placeholder="Kullanıcı Adı" style="margin-bottom: 5px;">
+                    <input type="password" id="uPass" class="chat-input-field" placeholder="Şifre" style="margin-bottom: 5px;">
+                    <textarea id="uMsg" class="chat-input-field" rows="2" placeholder="Scratch kodunuzu ve emojilerinizi yazın..."></textarea>
+                </div>
+            </div>
+            <button class="neon-btn" style="margin-top: 15px;" onclick="addMessage()">Kodu Paylaş</button>
+        </div>
+
+    </div>
+
+    <!-- Firebase Kütüphaneleri -->
+    <script src="https://gstatic.com"></script>
+    <script src="https://gstatic.com"></script>
+
+    <script>
+        // DIKKAT: Projenizi yayına alırken buradaki Firebase bilgilerini kendi Firebase konsolunuzdan aldığınız bilgilerle değiştirin.
+        const firebaseConfig = {
+            apiKey: "AIzaSyFakeKey_AlpSpace_123456789",
+            authDomain: "://firebaseapp.com",
+            databaseURL: "https://firebaseio.com",
+            projectId: "alpspace-project",
+            storageBucket: "://appspot.com",
+            messagingSenderId: "1234567890",
+            appId: "1:1234567890:web:abcdef123456"
+        };
+
+        // Firebase Başlatma
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+        const messagesRef = database.ref('messages');
+
+        // Metinleri güvenli hale getirmek için fonksiyon
+        function escapeHtml(text) {
+            return text
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        // Scratch Kodunu Kopyalama Fonksiyonu
+        function copyScratchText() {
+            const codeText = document.getElementById('scratchCodeArea').innerText;
+            navigator.clipboard.writeText(codeText).then(() => {
+                alert('Scratch kodu başarıyla kopyalandı!');
+            }).catch(err => {
+                alert('Kopyalama başarısız oldu: ', err);
+            });
+        }
+
+        // Kod Paylaşma (Veritabanına Yazma) Fonksiyonu
+        function addMessage() {
+            const name = document.getElementById('uName').value.trim();
+            const pass = document.getElementById('uPass').value.trim();
